@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OutletPulse | TSE Field Sales</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <section class="login-page" id="loginPage">
+    <div class="login-panel">
+      <div class="login-brand"><span class="brand-mark">S</span><span>Outlet<span>Pulse</span></span></div>
+      <p class="eyebrow">FIELD SALES INTELLIGENCE</p>
+      <h1>Welcome back</h1>
+      <p class="login-copy">Sign in to manage your outlet visits and sell-out reporting.</p>
+      <form id="loginForm" novalidate>
+        <label class="login-field">Username<input id="loginUsername" autocomplete="username" placeholder="Enter your username" /></label>
+        <label class="login-field">Password<div class="password-wrap"><input id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter your password" /><button type="button" id="showPassword" aria-label="Show password">Show</button></div></label>
+        <p class="login-error" id="loginError"></p>
+        <button class="btn primary login-submit" type="submit">Sign in</button>
+      </form>
+      <div class="demo-login"><b>Demo access</b><span>Username: <code>tse.demo</code></span><span>Password: <code>OutletPulse26!</code></span></div>
+    </div>
+    <div class="login-aside"><div><span class="login-kicker">OUTLET MANAGEMENT, SIMPLIFIED</span><h2>Every field visit,<br>clearly captured.</h2><p>Record sell-out performance, retail execution and competitive presenceâ€”whether youâ€™re at an outlet or reviewing the dayâ€™s coverage.</p></div></div>
+  </section>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><span class="brand-mark">S</span><span>Outlet<span>Pulse</span></span></div>
+      <nav>
+        <button class="nav-item active" data-view="dashboard"><span>â–¦</span> Dashboard</button>
+        <button class="nav-item" data-view="outlets"><span>âŒ•</span> Outlet Records</button>
+        <button class="nav-item" data-view="entry"><span>ï¼‹</span> New Visit Entry</button>
+        <button class="nav-item admin-only" data-view="admin"><span>Admin</span> Admin controls</button>
+      </nav>
+      <div class="sidebar-bottom"><span class="status-dot"></span> Local data saved on this device</div>
+    </aside>
+    <main>
+      <header>
+        <button class="menu" id="menuBtn" aria-label="Open menu">â˜°</button>
+        <div><p class="eyebrow">FIELD SALES INTELLIGENCE</p><h1 id="pageTitle">Dashboard</h1></div>
+        <div class="header-actions"><span class="user-chip">â—‰ <span id="currentUser">TSE User</span></span><button class="btn secondary" id="exportBtn">â‡© Export CSV</button><button class="btn primary jump-entry">ï¼‹ Add outlet visit</button><button class="logout" id="logoutBtn" title="Sign out">â†ª</button></div>
+      </header>
+
+      <section class="view active" id="dashboard">
+        <div class="dashboard-head"><div><h2>July 2026 performance</h2><p>Track outlet coverage and sell-out performance at a glance.</p></div><select id="dashboardMonth" class="select"><option>Jul'26</option></select></div>
+        <div class="stats" id="stats"></div>
+        <div class="dashboard-grid">
+          <article class="panel chart-panel"><div class="panel-head"><div><h3>Brand volume mix</h3><p>Units reported this month</p></div></div><div id="brandChart" class="brand-chart"></div></article>
+          <article class="panel"><div class="panel-head"><div><h3>Recent outlet visits</h3><p>Latest saved submissions</p></div><button class="text-btn" data-view="outlets">View all</button></div><div id="recentVisits" class="recent-list"></div></article>
+        </div>
+        <article class="panel attention"><div class="panel-head"><div><h3>Field coverage</h3><p>Store execution checkpoints</p></div></div><div id="coverage"></div></article>
+      </section>
+
+      <section class="view" id="outlets">
+        <div class="records-toolbar"><div><h2>Outlet records</h2><p>Search, update and manage field visit data.</p></div><button class="btn primary jump-entry">ï¼‹ New entry</button></div>
+        <div class="filter-row"><label class="search"><span>âŒ•</span><input id="searchInput" placeholder="Search dealer name, code, region or MDD" /></label><select id="regionFilter" class="select"><option value="">All regions</option></select></div>
+        <div class="records-card"><div id="recordsList" class="records-list"></div></div>
+      </section>
+
+      <section class="view" id="entry">
+        <div class="entry-head"><div><button class="back" data-view="outlets">â† Back to records</button><h2 id="formHeading">New outlet visit</h2><p>Capture the latest sell-out and retail execution details.</p></div><button class="btn secondary" id="clearForm">Clear form</button></div>
+        <form id="outletForm" novalidate>
+          <input type="hidden" id="recordId" />
+          <section class="form-card"><div class="card-title"><span class="step">01</span><div><h3>Outlet details</h3><p>Who was visited and who owns the outlet.</p></div></div><div class="field-grid details-grid" id="detailFields"></div></section>
+          <section class="form-card"><div class="card-title"><span class="step">02</span><div><h3>Sell-out volume</h3><p>Enter units by brand. Total and Samsung share are calculated automatically.</p></div></div><div class="metric-tabs" id="volumeTabs"></div><div class="brand-inputs" id="volumeInputs"></div></section>
+          <section class="form-card"><div class="card-title"><span class="step">03</span><div><h3>Sell-out value</h3><p>Enter sales value by brand in â‚¹. Total and Samsung share are calculated automatically.</p></div></div><div class="metric-tabs" id="valueTabs"></div><div class="brand-inputs" id="valueInputs"></div></section>
+          <section class="form-card"><div class="card-title"><span class="step">04</span><div><h3>Retail execution</h3><p>SEC count and visibility checks at this outlet.</p></div></div><div class="brand-inputs sec-inputs" id="secInputs"></div><div class="toggle-row"><label>SEZ availability <span>Is there an SEZ?</span></label><div class="segmented" data-field="sez"><button type="button" data-value="Y">Yes</button><button type="button" data-value="N">No</button></div><label>Samsung signage <span>Is Samsung signage visible?</span></label><div class="segmented" data-field="signage"><button type="button" data-value="Y">Yes</button><button type="button" data-value="N">No</button></div></div></section>
+          <div class="form-footer"><p id="formError" class="form-error"></p><button type="submit" class="btn primary large">Save outlet visit</button></div>
+        </form>
+      </section>
+      <section class="view" id="admin">
+        <div class="records-toolbar"><div><p class="eyebrow">ADMINISTRATION</p><h2>Admin controls</h2><p>Manage access and control how the local app is used.</p></div><button class="btn primary" id="newUserBtn">Add user</button></div>
+        <div class="admin-summary" id="adminSummary"></div>
+        <div class="admin-grid">
+          <section class="form-card"><div class="card-title"><span class="step">01</span><div><h3>User access</h3><p>Set role-based access for field teams.</p></div></div><div id="usersList" class="users-list"></div></section>
+          <section class="form-card"><div class="card-title"><span class="step">02</span><div><h3>Editing controls</h3><p>Role permissions in this local prototype.</p></div></div><div class="permission-list"><div><b>Admin</b><span>Manage users, records, exports and configuration.</span></div><div><b>Editor</b><span>Create, update, remove and export outlet visits.</span></div><div><b>Viewer</b><span>View dashboards and export data; no record editing.</span></div></div><div class="data-actions"><button class="btn secondary" id="adminExport">Export all records</button><button class="btn secondary" id="seedReset">Restore sample records</button></div></section>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div id="userModal" class="modal"><div class="modal-card"><div class="modal-head"><div><h3 id="userModalTitle">Add user</h3><p>Set credentials and access level.</p></div><button type="button" class="modal-close" id="closeUserModal">x</button></div><form id="userForm"><input type="hidden" id="userId" /><div class="field-grid"><div class="field"><label>Full name *</label><input id="userName" required placeholder="e.g. Priya Sharma" /></div><div class="field"><label>Username *</label><input id="userUsername" required placeholder="e.g. priya.sharma" /></div><div class="field"><label>Password *</label><input id="userPassword" required placeholder="Set a password" /></div><div class="field"><label>Role *</label><select id="userRole"><option>Editor</option><option>Viewer</option><option>Admin</option></select></div></div><p class="form-error" id="userError"></p><div class="modal-actions"><button type="button" class="btn secondary" id="cancelUserModal">Cancel</button><button type="submit" class="btn primary">Save user</button></div></form></div></div>
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
+
